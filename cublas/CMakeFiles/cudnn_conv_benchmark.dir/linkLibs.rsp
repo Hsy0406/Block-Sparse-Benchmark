@@ -1,0 +1,1 @@
+ -lcublas -lcurand -lcudnn -lcudadevrt -lcudart_static -lrt -lpthread -ldl 

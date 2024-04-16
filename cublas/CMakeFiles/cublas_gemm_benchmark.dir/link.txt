@@ -1,0 +1,1 @@
+/usr/bin/g++ @CMakeFiles/cublas_gemm_benchmark.dir/objects1 -o cublas_gemm_benchmark @CMakeFiles/cublas_gemm_benchmark.dir/linkLibs.rsp -L"/usr/local/cuda-11.1/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda-11.1/targets/x86_64-linux/lib"
