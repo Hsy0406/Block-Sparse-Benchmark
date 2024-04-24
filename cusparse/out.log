@@ -1,0 +1,49 @@
+Density: 0.02 Tensor shape: 4*4 Time: 0.0001264 ms
+Density: 0.05 Tensor shape: 4*4 Time: 0.0001232 ms
+Density: 0.1 Tensor shape: 4*4 Time: 0.119045 ms
+Density: 0.2 Tensor shape: 4*4 Time: 0.116528 ms
+Density: 0.3 Tensor shape: 4*4 Time: 0.126338 ms
+Density: 0.4 Tensor shape: 4*4 Time: 0.11939 ms
+Density: 0.5 Tensor shape: 4*4 Time: 0.115944 ms
+
+Density: 0.02 Tensor shape: 8*8 Time: 0.132302 ms
+Density: 0.05 Tensor shape: 8*8 Time: 0.126256 ms
+Density: 0.1 Tensor shape: 8*8 Time: 0.118541 ms
+Density: 0.2 Tensor shape: 8*8 Time: 0.125867 ms
+Density: 0.3 Tensor shape: 8*8 Time: 0.115987 ms
+Density: 0.4 Tensor shape: 8*8 Time: 0.128176 ms
+Density: 0.5 Tensor shape: 8*8 Time: 0.127098 ms
+
+Density: 0.02 Tensor shape: 16*16 Time: 0.03848 ms
+Density: 0.05 Tensor shape: 16*16 Time: 0.0262448 ms
+Density: 0.1 Tensor shape: 16*16 Time: 0.0357136 ms
+Density: 0.2 Tensor shape: 16*16 Time: 0.0370032 ms
+Density: 0.3 Tensor shape: 16*16 Time: 0.0261696 ms
+Density: 0.4 Tensor shape: 16*16 Time: 0.0263968 ms
+Density: 0.5 Tensor shape: 16*16 Time: 0.0263136 ms
+
+Density: 0.02 Tensor shape: 32*32 Time: 0.0271632 ms
+Density: 0.05 Tensor shape: 32*32 Time: 0.0376816 ms
+Density: 0.1 Tensor shape: 32*32 Time: 0.0259584 ms
+Density: 0.2 Tensor shape: 32*32 Time: 0.0262192 ms
+Density: 0.3 Tensor shape: 32*32 Time: 0.0361008 ms
+Density: 0.4 Tensor shape: 32*32 Time: 0.0368032 ms
+Density: 0.5 Tensor shape: 32*32 Time: 0.0261536 ms
+
+Density: 0.02 Tensor shape: 64*64 Time: 0.036856 ms
+Density: 0.05 Tensor shape: 64*64 Time: 0.0383264 ms
+Density: 0.1 Tensor shape: 64*64 Time: 0.0364048 ms
+Density: 0.2 Tensor shape: 64*64 Time: 0.036736 ms
+Density: 0.3 Tensor shape: 64*64 Time: 0.0453584 ms
+Density: 0.4 Tensor shape: 64*64 Time: 0.0455904 ms
+Density: 0.5 Tensor shape: 64*64 Time: 0.0452768 ms
+
+Density: 0.02 Tensor shape: 128*128 Time: 0.0989648 ms
+Density: 0.05 Tensor shape: 128*128 Time: 0.056688 ms
+Density: 0.1 Tensor shape: 128*128 Time: 0.237778 ms
+Density: 0.2 Tensor shape: 128*128 Time: 0.119069 ms
+Density: 0.3 Tensor shape: 128*128 Time: 0.12755 ms
+Density: 0.4 Tensor shape: 128*128 Time: 0.0750768 ms
+Density: 0.5 Tensor shape: 128*128 Time: 0.377322 ms
+Density: 0.4 Tensor shape: 512*512 Time: 6.93846 ms
+Density: 0.5 Tensor shape: 512*512 Time: 5.32471 ms
