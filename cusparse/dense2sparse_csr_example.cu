@@ -77,7 +77,13 @@ float get_random()
 {
 	static std::default_random_engine e;
 	static std::uniform_real_distribution<> dis(0, 1); // rage 0 - 1
-	return dis(e);
+	float a = dis(e);
+	if (a == 0.0) {
+		return 0.05f;
+	}
+	else {
+		return dis(e);
+	}
 }
 void dense2csr(int num_rows, int num_cols, float density, int* h_csr_offsets, int* h_csr_columns, float* h_csr_values) {
     int   ld         = num_cols;
@@ -88,23 +94,30 @@ void dense2csr(int num_rows, int num_cols, float density, int* h_csr_offsets, in
 	//input initialization 
 	int dense_num = (int)(density * dense_size);
 	int h_nnz = 0;
+	std::vector<float> out0;
     for (int i = 0; i < dense_size; ++i) {
 		float rate = get_random();
-		if ((rate <= density) && (h_nnz < dense_num)){
-			h_dense[i] = rate;
-			h_nnz += 1;
+		if (h_nnz < dense_num){
+			if ((rate <= density) || (h_nnz < (int) (dense_num * 0.9f))) {
+				h_dense[i] = rate;
+				h_nnz += 1;
+				out0.push_back(rate);
+			}
 		}
-		else if (h_nnz >= dense_num){
+		else {
 			h_dense[i] = 0.0f;
 		}
     }
+	if (dense_num != out0.size()) {
+		std::cout << "the size is wrong!" << std::endl;	
+	}
     //--------------------------------------------------------------------------
     // Device memory management
     int   *d_csr_offsets, *d_csr_columns;
     float *d_csr_values,  *d_dense;
 
     cudaMalloc(&d_dense, dense_size * sizeof(float));
-    cudaMalloc((void**) &d_csr_offsets, (num_rows + 1) * sizeof(int));
+    cudaMalloc(&d_csr_offsets, (num_rows + 1) * sizeof(int));
     cudaMemcpy(d_dense, h_dense, dense_size * sizeof(float), cudaMemcpyHostToDevice);
     //--------------------------------------------------------------------------
     // CUSPARSE APIs
@@ -139,6 +152,7 @@ void dense2csr(int num_rows, int num_cols, float density, int* h_csr_offsets, in
                                          &nnz);
 
     // allocate CSR column indices and values
+	nnz = out0.size();
     cudaMalloc((void**) &d_csr_columns, nnz * sizeof(int));
     cudaMalloc((void**) &d_csr_values,  nnz * sizeof(float));
     // reset offsets, column indices, and values pointers
@@ -161,6 +175,12 @@ void dense2csr(int num_rows, int num_cols, float density, int* h_csr_offsets, in
                            cudaMemcpyDeviceToHost);
     cudaMemcpy(h_csr_values, d_csr_values, nnz * sizeof(float),
                            cudaMemcpyDeviceToHost);
+	//for (int i=0; i< out0.size(); i++) {
+	//	if (out0[i] != h_csr_values0[i]) {
+	//		std::cout << "Find a wrong number, out0: " << out0[i] << " h_csr_values: " << h_csr_values[i] << " i:" << i << std::endl;
+	//	}
+	//}
+	//std::cout << std::endl;
     //--------------------------------------------------------------------------
     // device memory deallocation
     cudaFree(dBuffer);
@@ -168,6 +188,7 @@ void dense2csr(int num_rows, int num_cols, float density, int* h_csr_offsets, in
     cudaFree(d_csr_columns);
     cudaFree(d_csr_values);
     cudaFree(d_dense);
+	free(h_dense);
 }
 //int main(void) {
 //	int    num_rows = 64;

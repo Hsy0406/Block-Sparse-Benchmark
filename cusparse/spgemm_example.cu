@@ -126,8 +126,8 @@ void CsrSpmm(int A_num_rows, int A_num_cols, int A_nnz, int B_num_rows, int B_nu
     //int   hB_columns[]    = { 0, 3, 1, 3, 0, 1, 2, 1 };
     //float hB_values[]     = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f,
     //                          6.0f, 7.0f, 8.0f };
-    const int C_nnz       = 12;
-    #define   C_NUM_NNZ 12   // C compatibility
+    //const int C_nnz       = 12;
+    //#define   C_NUM_NNZ 12   // C compatibility
     float               alpha       = 1.0f;
     float               beta        = 0.0f;
     cusparseOperation_t opA         = CUSPARSE_OPERATION_NON_TRANSPOSE;
@@ -253,18 +253,28 @@ void CsrSpmm(int A_num_rows, int A_num_cols, int A_nnz, int B_num_rows, int B_nu
     cusparseDestroySpMat(matB);
     cusparseDestroySpMat(matC);
     cusparseDestroy(handle);
-    //--------------------------------------------------------------------------
-    // device result check
-    int   hC_csrOffsets_tmp[A_NUM_ROWS + 1];
-    int   hC_columns_tmp[C_NUM_NNZ];
-    float hC_values_tmp[C_NUM_NNZ];
-    cudaMemcpy(hC_csrOffsets_tmp, dC_csrOffsets,
-                           (A_num_rows + 1) * sizeof(int),
-                           cudaMemcpyDeviceToHost);
-    cudaMemcpy(hC_columns_tmp, dC_columns, C_nnz * sizeof(int),
-                           cudaMemcpyDeviceToHost);
-    cudaMemcpy(hC_values_tmp, dC_values, C_nnz * sizeof(float),
-                           cudaMemcpyDeviceToHost);
+	//std::cout << " YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY ms" << std::endl;
+    ////--------------------------------------------------------------------------
+    //// device result check
+    //int*   hC_csrOffsets_tmp[A_num_rows + 1];
+	//std::cout << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT" << std::endl;
+    //int*   hC_columns_tmp[C_nnz1];
+	//std::cout << " UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU" << std::endl;
+    //float* hC_values_tmp[C_nnz1];
+	//std::cout << " LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL" << std::endl;
+    //cudaMemcpy(hC_csrOffsets_tmp, dC_csrOffsets,
+    //                       (A_num_rows + 1) * sizeof(int),
+    //                       cudaMemcpyDeviceToHost);
+	//std::cout << "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" << std::endl;
+    //cudaMemcpy(hC_columns_tmp, dC_columns, C_nnz1 * sizeof(int),
+    //                       cudaMemcpyDeviceToHost);
+    //cudaMemcpy(hC_values_tmp, dC_values, C_nnz1 * sizeof(float),
+    //                       cudaMemcpyDeviceToHost);
+	//std::cout << "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" << std::endl;
+	//cudaFree(hC_csrOffsets_tmp);
+	//cudaFree(hC_columns_tmp);
+	//cudaFree(hC_values_tmp);
+
     //--------------------------------------------------------------------------
     // device memory deallocation
     cudaFree(dBuffer1);
@@ -326,12 +336,12 @@ void test(int block_size, float density) {
 	CsrSpmm(A_num_rows, A_num_cols, A_nnz, B_num_rows, B_num_cols,
 			   	B_nnz, A_csr_offsets, A_csr_columns, A_csr_values, 
 				B_csr_offsets, B_csr_columns, B_csr_values);
-	//free(A_csr_offsets);
-	//free(A_csr_columns);
-	//free(A_csr_values);
-	//free(B_csr_offsets);
-	//free(B_csr_columns);
-	//free(B_csr_values);
+	free(A_csr_offsets);
+	free(A_csr_columns);
+	free(A_csr_values);
+	free(B_csr_offsets);
+	free(B_csr_columns);
+	free(B_csr_values);
 }
 
 int main(int argc, char* argv[]) {
